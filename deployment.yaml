@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: event-app
+  template:
+    metadata:
+      labels:
+        app: event-app
+    spec:
+      containers:
+      - name: event-container
+        image: event-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
