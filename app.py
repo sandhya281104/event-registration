@@ -8,7 +8,7 @@ def form():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    print("Webhook test working")
+    print("CI/CD demo run")
     name = request.form['name']
     email = request.form['email']
     return render_template('success.html', name=name, email=email)
