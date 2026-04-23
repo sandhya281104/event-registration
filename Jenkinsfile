@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy to Kubernetes') {
+        stage('Build Trigger') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
+                echo "Code fetched from GitHub successfully"
+                echo "Deployment will be handled via Kubernetes"
             }
         }
     }
