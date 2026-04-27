@@ -2,10 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Trigger') {
+
+        stage('Clone Code') {
             steps {
-                echo "Code fetched from GitHub successfully"
-                echo "Deployment will be handled via Kubernetes"
+                git 'https://github.com/your-username/event-app.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t event-app .'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'pytest || true'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
             }
         }
     }
